@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         command-script
 // @namespace    https://github.com/alzamon/userscripts
-// @version      0.1
+// @version      0.2
 // @description  script for general commands and interface for executing them
 // @author       Asgeir Steine
 // @match        *://*/*
