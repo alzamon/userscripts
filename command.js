@@ -1,12 +1,15 @@
 // ==UserScript==
 // @name         command-script
-// @namespace    http://tampermonkey.net/
+// @namespace    https://github.com/alzamon/userscripts
 // @version      0.1
 // @description  script for general commands and interface for executing them
-// @author       alzamon
+// @author       Asgeir Steine
 // @match        *://*/*
 // @grant        GM_setValue
 // @grant        GM_getValue
+// @updateURL   https://raw.githubusercontent.com/alzamon/userscripts/main/command.js
+// @downloadURL https://raw.githubusercontent.com/alzamon/userscripts/main/command.js
+// @supportURL  https://github.com/alzamon/userscripts/issues
 // ==/UserScript==
 
 (function() {
