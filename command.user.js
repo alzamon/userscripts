@@ -6,7 +6,7 @@
 // @author       Asgeir Steine
 // @match        *://*/*
 // @grant        GM_setValue
-// @grant        GM_getValue
+// @grant        GM_addValueChangeListener
 // @updateURL   https://raw.githubusercontent.com/alzamon/userscripts/main/command.js
 // @downloadURL https://raw.githubusercontent.com/alzamon/userscripts/main/command.js
 // @supportURL  https://github.com/alzamon/userscripts/issues
@@ -17,8 +17,8 @@
 
     // Trigger this function however you like (e.g., button click, event)
     function sendData() {
-        const query = prompt("Choose command: ");
-        GM_setValue("gpt-query", query + " " + window.location.origin);
+        const command = prompt("Choose command: ");
+        GM_setValue("command", command + " " + window.location.origin);
     }
 
     // Event listener for keydown event
@@ -32,4 +32,8 @@
             }
         }
     });
+
+	GM_addValueChangeListener('command',   function(key, oldValue, newValue, remote) {
+		console.log('command changed to ' + newValue)
+	});
 })();
