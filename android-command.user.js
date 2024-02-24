@@ -43,7 +43,7 @@
         return Math.abs(dx) >= threshold && Math.abs(dy) <= restraint && dx > 0;
     }
 
-    GM_addValueChangeListener('command',   function(key, oldValue, newValue, remote) {
+    GM_addValueChangeListener('command', function(key, oldValue, newValue, remote) {
         console.log('command changed to ' + newValue)
     });
 })();
