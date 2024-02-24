@@ -13,37 +13,37 @@
 // ==/UserScript==
 
 (function() {
-	'use strict';
+    'use strict';
 
-	let startX, startY, endX, endY;
+    let startX, startY, endX, endY;
 
-	document.addEventListener('touchstart', function(e) {
-		startX = e.touches[0].pageX;
-		startY = e.touches[0].pageY;
-	}, false);
+    document.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].pageX;
+        startY = e.touches[0].pageY;
+    }, false);
 
-	document.addEventListener('touchend', function(e) {
-		endX = e.changedTouches[0].pageX;
-		endY = e.changedTouches[0].pageY;
+    document.addEventListener('touchend', function(e) {
+        endX = e.changedTouches[0].pageX;
+        endY = e.changedTouches[0].pageY;
 
-		if(isSwipeRight()) {
-			let command = prompt("Enter the command to run:");
-			GM_setValue("command", command + " " + window.location.origin);
-		}
-	}, false);
+        if(isSwipeRight()) {
+            let command = prompt("Enter the command to run:");
+            GM_setValue("command", command + " " + window.location.origin);
+        }
+    }, false);
 
-	function isSwipeRight() {
-		const threshold = 100; // Minimum distance for a swipe
-		const restraint = 100; // Maximum allowed vertical movement
-		const allowedTime = 300; // Maximum time allowed from touchstart to touchend
+    function isSwipeRight() {
+        const threshold = 100; // Minimum distance for a swipe
+        const restraint = 100; // Maximum allowed vertical movement
+        const allowedTime = 300; // Maximum time allowed from touchstart to touchend
 
-		const dx = endX - startX;
-		const dy = endY - startY;
+        const dx = endX - startX;
+        const dy = endY - startY;
 
-		return Math.abs(dx) >= threshold && Math.abs(dy) <= restraint && dx > 0;
-	}
+        return Math.abs(dx) >= threshold && Math.abs(dy) <= restraint && dx > 0;
+    }
 
-	GM_addValueChangeListener('command',   function(key, oldValue, newValue, remote) {
-		console.log('command changed to ' + newValue)
-	});
+    GM_addValueChangeListener('command',   function(key, oldValue, newValue, remote) {
+        console.log('command changed to ' + newValue)
+    });
 })();
