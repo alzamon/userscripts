@@ -13,25 +13,25 @@
 // ==/UserScript==
 
 (function() {
-    'use strict';
+	'use strict';
 
-    // Trigger this function however you like (e.g., button click, event)
-    function sendData() {
-        const command = prompt("Choose command: ");
-        GM_setValue("command", command + " " + window.location.origin);
-    }
+	// Trigger this function however you like (e.g., button click, event)
+	function sendData() {
+		const command = prompt("Choose command: ");
+		GM_setValue("command", command + " " + window.location.origin);
+	}
 
-    // Event listener for keydown event
-    document.addEventListener('keydown', function(e) {
-        // Check if Ctrl is pressed along with 'B' key
-        if (e.key === ':') {
-            const exclude = ['input', 'textarea'];
-            if (exclude.indexOf(event.target.tagName.toLowerCase()) === -1) {
-                e.preventDefault(); // Prevent the default action for this key combination
-                sendData();
-            }
-        }
-    });
+	// Event listener for keydown event
+	document.addEventListener('keydown', function(e) {
+		// Check if Ctrl is pressed along with 'B' key
+		if (e.key === ':') {
+			const exclude = ['input', 'textarea'];
+			if (exclude.indexOf(event.target.tagName.toLowerCase()) === -1) {
+				e.preventDefault(); // Prevent the default action for this key combination
+				sendData();
+			}
+		}
+	});
 
 	GM_addValueChangeListener('command',   function(key, oldValue, newValue, remote) {
 		console.log('command changed to ' + newValue)
