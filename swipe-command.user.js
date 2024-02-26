@@ -5,13 +5,17 @@
 // @description  Select a word from an array after a specific swipe gesture
 // @author       You
 // @match        *://*/*
-// @grant        none
+// @grant        window.close
+// @grant GM.setValue
+// @grant GM.getValue
+
 // ==/UserScript==
 
 (function() {
     'use strict';
 
-    const words = ['close tab', 'close all but pinned', 'pin tab', 'unpin tab'];
+    const words = {'close tab': () => {window.close()}, 'close all but pinned': () => {}, 'pin tab': () => {document.tabIsPinned = true }, 'unpin tab': () => {document.tabIsPinned = false}};
+    const wordKeys = Object.keys(words);
     let startX, startY, maxRightX = 0, swipeRightComplete = false, currentWord = '';
 
     const floatingWord = document.createElement('div');
@@ -40,9 +44,9 @@
 
         // If swipe right is complete and touch is moving back to the left significantly
         if (swipeRightComplete && (maxRightX - touchX) > window.innerWidth * 0.1) {
-            let index = Math.floor(((touchX - (maxRightX - window.innerWidth * 0.9)) / (window.innerWidth * 0.9)) * words.length);
-            index = Math.max(0, Math.min(index, words.length - 1));
-            currentWord = words[index];
+            let index = Math.floor(((touchX - (maxRightX - window.innerWidth * 0.9)) / (window.innerWidth * 0.9)) * wordKeys.length);
+            index = Math.max(0, Math.min(index, wordKeys.length - 1));
+            currentWord = wordKeys[index];
             displayWord(floatingWord, currentWord, window.innerWidth/2, touchY);
         }
     }, false);
@@ -50,6 +54,7 @@
     document.addEventListener('touchend', function() {
         if (swipeRightComplete) {
             floatingWord.style.display = 'none';
+            words[currentWord]();
             alert('Selected word: ' + currentWord);
         }
         // Reset the swipe tracking variables
@@ -73,7 +78,6 @@
     function displayWord(element, word, x, y) {
         element.textContent = word;
         const scrollYOffset = window.pageYOffset || document.documentElement.scrollTop;
-     //   element.style.centre = `${x}px`;
         element.style.top = `${y - 100}px`; // Position slightly above the finger
         element.style.display = 'block';
     }
