@@ -19,7 +19,7 @@
 			window.close();
 		},
 		"close all but pinned": () => {
-			GM.setValue("command", "close all but pinned");
+			GM.setValue("lastCommand", "close all but pinned");
 		},
 		"pin tab": () => {
 			document.tabIsPinned = true;
