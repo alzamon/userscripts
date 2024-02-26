@@ -100,7 +100,7 @@
 		function () {
 			if (swipeRightComplete) {
 				floatingWord.style.display = "none";
-				GM.setValue(lastCommand, currentWord);
+				GM.setValue("lastCommand", currentWord);
 			}
 			// Reset the swipe tracking variables
 			swipeRightComplete = false;
