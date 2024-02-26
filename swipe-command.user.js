@@ -100,7 +100,7 @@
 		function () {
 			if (swipeRightComplete) {
 				floatingWord.style.display = "none";
-				GM.setValue("lastCommand", currentWord);
+				commands[currentWord]();
 			}
 			// Reset the swipe tracking variables
 			swipeRightComplete = false;
@@ -131,16 +131,19 @@
 		element.style.display = "block";
 	}
 
-	GM_addValueChangeListener(function (key, oldValue, newValue, remote) {
-		if (oldValue == newValue) {
-			return;
-		} else {
-			if (
-				newValue === "close all but pinned" &&
-				!document.tabIsPinned
-			) {
-				window.close();
+	GM_addValueChangeListener(
+		"lastCommand",
+		function (key, oldValue, newValue, remote) {
+			if (oldValue == newValue) {
+				return;
+			} else {
+				if (
+					newValue === "close all but pinned" &&
+					!document.tabIsPinned
+				) {
+					window.close();
+				}
 			}
 		}
-	});
+	);
 })();
