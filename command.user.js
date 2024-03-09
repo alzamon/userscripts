@@ -17,16 +17,17 @@
 	"use strict";
 
 	const commands = {
-		"close tab": () => window.close(),
-		"pin tab": () => {},
-		"close all but pinned": () => {
+		"close tab": (command) => window.close(),
+		"pin tab": (command) => {},
+		"close all but pinned": (command) => {
 			GM_setValue("command", "close all but pinned");
 		},
-		"close all but active": () => {
-			GM_setValue(
-				"command",
-				"close all but active " + window.location.origin
-			);
+		"close all but active": (command) => {
+			if (command.includes(window.location.origin)) {
+				console.log("ignoring active tab");
+			} else {
+				console.log("closing this tab");
+			}
 		},
 	};
 	const commandKeys = Object.keys(commands);
@@ -58,7 +59,7 @@
 			);
 			if (recognizedCommand) {
 				console.log("Executing " + recognizedCommand);
-				commands[recognizedCommand];
+				commands[recognizedCommand](recognizedCommand);
 			}
 		}
 	);
