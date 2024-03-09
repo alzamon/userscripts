@@ -53,19 +53,13 @@
 	GM_addValueChangeListener(
 		"command",
 		function (key, oldValue, newValue, remote) {
-			console.log(newValue);
-			console.log(window.location.origin);
-			if (
-				newValue.includes("close all but active") &&
-				!newValue.includes(
-					"close all but active " +
-						window.location.origin
-				)
-			) {
-				console.log("trying to close page");
-				window.close();
+			const recognizedCommand = commandKeys.find((command) =>
+				newValue.startsWith(command)
+			);
+			if (recognizedCommand) {
+				console.log("Executing " + recognizedCommand);
+				commands[recognizedCommand];
 			}
-			console.log("command changed to " + newValue);
 		}
 	);
 })();
