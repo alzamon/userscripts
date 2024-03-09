@@ -6,6 +6,7 @@
 // @author       Asgeir Steine
 // @match        *://*/*
 // @grant        GM_setValue
+// @grant        GM_getValue
 // @grant        GM_addValueChangeListener
 // @grant        window.close
 // @updateURL   https://raw.githubusercontent.com/alzamon/userscripts/main/command.js
