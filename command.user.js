@@ -23,10 +23,10 @@
 			GM_setValue("command", "close all but pinned");
 		},
 		"close all but active": () => {
-			GM_setValue("command", [
-				"close all but active",
-				window.origin,
-			]);
+			GM_setValue(
+				"command",
+				"close all but active " + window.origin
+			);
 		},
 	};
 	const commandKeys = Object.keys(commands);
@@ -60,9 +60,10 @@
 			console.log(newValue[0]);
 			console.log(newValue[1]);
 			if (
-				newValue.constructor === Array &&
-				newValue[0] === "close all but active" &&
-				window.origin !== newValue[1]
+				newValue.includes("close all but active") &&
+				!newValue.includes(
+					"close all but active " + window.origin
+				)
 			) {
 				console.log("trying to close page");
 				window.close();
