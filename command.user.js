@@ -63,6 +63,7 @@
 				)
 			) {
 				console.log("trying to close page");
+				window.close();
 			}
 			console.log("command changed to " + newValue);
 		}
