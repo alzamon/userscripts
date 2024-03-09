@@ -20,7 +20,7 @@
 	const commands = {
 		"close origin": () => {
 			if (
-				GM_getValue("command origin") ==
+				GM.getValue("command origin") ==
 				window.location.origin
 			) {
 				window.close();
