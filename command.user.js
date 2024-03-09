@@ -58,8 +58,8 @@
 				newValue.startsWith(command)
 			);
 			if (recognizedCommand) {
-				console.log("Executing " + recognizedCommand);
-				commands[recognizedCommand](recognizedCommand);
+				console.log("Executing " + newValue);
+				commands[recognizedCommand](newValue);
 			}
 		}
 	);
