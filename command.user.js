@@ -6,7 +6,7 @@
 // @author       Asgeir Steine
 // @match        *://*/*
 // @grant        GM_setValue
-// @grant        GM_getValue
+// @grant        GM.getValue
 // @grant        GM_addValueChangeListener
 // @grant        window.close
 // @updateURL   https://raw.githubusercontent.com/alzamon/userscripts/main/command.js
@@ -28,7 +28,7 @@
 		},
 		"pin origin": () => {
 			const newPins =
-				(GM_getValue("pinned") || "") +
+				(GM.getValue("pinned") || "") +
 				window.location.origin +
 				" ";
 			GM_setValue("pinned", newPins);
