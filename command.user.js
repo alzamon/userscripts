@@ -46,6 +46,9 @@
 				console.log(newPins);
 			});
 		},
+		"clear pinned origins": () => {
+			GM_setValue("pinned", "");
+		},
 		"close all but pinned": () => {
 			GM.getValue("pinned").then((pinned) => {
 				if (
