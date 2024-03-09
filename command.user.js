@@ -12,6 +12,7 @@
 // @updateURL   https://raw.githubusercontent.com/alzamon/userscripts/main/command.js
 // @downloadURL https://raw.githubusercontent.com/alzamon/userscripts/main/command.js
 // @supportURL  https://github.com/alzamon/userscripts/issues
+// @noframes
 // ==/UserScript==
 
 (function () {
