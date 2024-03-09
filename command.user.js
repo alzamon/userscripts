@@ -25,7 +25,7 @@
 		"close all but active": () => {
 			GM_setValue(
 				"command",
-				"close all but active " + window.origin
+				"close all but active " + window.location.origin
 			);
 		},
 	};
