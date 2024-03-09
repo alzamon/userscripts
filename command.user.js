@@ -17,16 +17,48 @@
 	"use strict";
 
 	const commands = {
-		"close tab": (command) => window.close(),
-		"pin tab": (command) => {},
-		"close all but pinned": (command) => {
-			GM_setValue("command", "close all but pinned");
+		"close origin": () => {
+			if (
+				GM_getValue("command origin") ==
+				window.location.origin
+			) {
+				window.close();
+			}
 		},
-		"close all but active": (command) => {
-			if (command.includes(window.location.origin)) {
+		"pin origin": () => {
+			const newPins =
+				(GM_getValue("pinned") || "") +
+				window.location.origin +
+				" ";
+			GM_setValue("pinned", newPins);
+			console.log("Pinned origins " + newPins);
+		},
+		"unpin origin": () => {
+			const newPins = GM_getValue("pinned").replace(
+				GM_getValue("command origin") + " ",
+				""
+			);
+			GM_setValue("pinned", newPins);
+			console.log(newPins);
+		},
+		"close all but pinned": () => {
+			if (
+				GM_getValue("pinned").includes(
+					window.location.origin + " "
+				)
+			) {
+				console.log("ignoring pinned tab");
+			} else {
+				window.close();
+			}
+		},
+		"close all but active": () => {
+			if (
+				GM_getValue("command origin") ==
+				window.location.origin
+			) {
 				console.log("ignoring active tab");
 			} else {
-				console.log("closing this tab");
 				window.close();
 			}
 		},
@@ -35,7 +67,8 @@
 
 	function sendData() {
 		const command = prompt("Choose command: ");
-		GM_setValue("command", command + " " + window.location.origin);
+		GM_setValue("command origin", window.location.origin);
+		GM_setValue("command", command);
 	}
 
 	document.addEventListener("keydown", function (e) {
@@ -55,12 +88,12 @@
 	GM_addValueChangeListener(
 		"command",
 		function (key, oldValue, newValue, remote) {
-			const recognizedCommand = commandKeys.find((command) =>
-				newValue.startsWith(command)
+			const recognizedCommand = commandKeys.find(
+				(command) => newValue === command
 			);
 			if (newValue !== oldValue && recognizedCommand) {
 				console.log("Executing " + newValue);
-				commands[recognizedCommand](newValue);
+				commands[recognizedCommand]();
 			}
 		}
 	);
