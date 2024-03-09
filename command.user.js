@@ -26,7 +26,7 @@
 			if (command.includes(window.location.origin)) {
 				console.log("ignoring active tab");
 			} else {
-				console.log("closing this tab");
+				window.close();
 			}
 		},
 	};
