@@ -35,8 +35,8 @@
 			console.log("Pinned origins " + newPins);
 		},
 		"unpin origin": () => {
-			const newPins = GM_getValue("pinned").replace(
-				GM_getValue("command origin") + " ",
+			const newPins = GM.getValue("pinned").replace(
+				GM.getValue("command origin") + " ",
 				""
 			);
 			GM_setValue("pinned", newPins);
@@ -44,7 +44,7 @@
 		},
 		"close all but pinned": () => {
 			if (
-				GM_getValue("pinned").includes(
+				GM.getValue("pinned").includes(
 					window.location.origin + " "
 				)
 			) {
@@ -55,7 +55,7 @@
 		},
 		"close all but active": () => {
 			if (
-				GM_getValue("command origin") ==
+				GM.getValue("command origin") ==
 				window.location.origin
 			) {
 				console.log("ignoring active tab");
