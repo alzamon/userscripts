@@ -18,10 +18,19 @@
 
 	const commands = {
 		"close tab": () => window.close(),
+		"pin tab": () => {},
+		"close all but pinned": () => {
+			GM_setValue("command", "close all but pinned");
+		},
+		"close all but active": () => {
+			GM_setValue("command", [
+				"close all but active",
+				window.origin,
+			]);
+		},
 	};
 	const commandKeys = Object.keys(commands);
 
-	// Trigger this function however you like (e.g., button click, event)
 	function sendData() {
 		const command = prompt("Choose command: ");
 		if (commandKeys.includes(command)) {
@@ -30,7 +39,6 @@
 		GM_setValue("command", command + " " + window.location.origin);
 	}
 
-	// Event listener for keydown event
 	document.addEventListener("keydown", function (e) {
 		if (e.key === ":") {
 			const exclude = ["input", "textarea"];
@@ -48,6 +56,13 @@
 	GM_addValueChangeListener(
 		"command",
 		function (key, oldValue, newValue, remote) {
+			if (
+				newValue.constructor === Array &&
+				newValue[0] === "close all but active" &&
+				window.origin !== newValue[1]
+			) {
+				window.close();
+			}
 			console.log("command changed to " + newValue);
 		}
 	);
