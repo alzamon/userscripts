@@ -57,7 +57,7 @@
 			const recognizedCommand = commandKeys.find((command) =>
 				newValue.startsWith(command)
 			);
-			if (recognizedCommand) {
+			if (newValue !== oldValue && recognizedCommand) {
 				console.log("Executing " + newValue);
 				commands[recognizedCommand](newValue);
 			}
