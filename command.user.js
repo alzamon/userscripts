@@ -62,7 +62,8 @@
 			if (
 				newValue.includes("close all but active") &&
 				!newValue.includes(
-					"close all but active " + window.origin
+					"close all but active " +
+						window.location.origin
 				)
 			) {
 				console.log("trying to close page");
