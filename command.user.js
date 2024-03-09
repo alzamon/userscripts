@@ -17,7 +17,7 @@
 	"use strict";
 
 	const commands = {
-		closeTab: () => window.close(),
+		"close tab": () => window.close(),
 	};
 	const commandKeys = Object.keys(commands);
 
@@ -32,7 +32,6 @@
 
 	// Event listener for keydown event
 	document.addEventListener("keydown", function (e) {
-		// Check if Ctrl is pressed along with 'B' key
 		if (e.key === ":") {
 			const exclude = ["input", "textarea"];
 			if (
