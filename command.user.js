@@ -19,49 +19,53 @@
 
 	const commands = {
 		"close origin": () => {
-			if (
-				GM.getValue("command origin") ==
-				window.location.origin
-			) {
-				window.close();
-			}
+			GM.getValue("command origin").then((commandOrigin) => {
+				if (commandOrigin == window.location.origin) {
+					window.close();
+				}
+			});
 		},
 		"pin origin": () => {
-			const newPins =
-				(GM.getValue("pinned") || "") +
-				window.location.origin +
-				" ";
-			GM_setValue("pinned", newPins);
-			console.log("Pinned origins " + newPins);
+			GM.getValue("pinned").then((pinned) => {
+				const newPins =
+					(pinned || "") +
+					window.location.origin +
+					" ";
+				GM_setValue("pinned", newPins);
+				console.log("Pinned origins " + newPins);
+			});
 		},
 		"unpin origin": () => {
-			const newPins = GM.getValue("pinned").replace(
-				GM.getValue("command origin") + " ",
-				""
-			);
-			GM_setValue("pinned", newPins);
-			console.log(newPins);
+			GM.getValue("pinned").then((pinned) => {
+				const newPins = pinned.replace(
+					GM.getValue("command origin") + " ",
+					""
+				);
+				GM_setValue("pinned", newPins);
+				console.log(newPins);
+			});
 		},
 		"close all but pinned": () => {
-			if (
-				GM.getValue("pinned").includes(
-					window.location.origin + " "
-				)
-			) {
-				console.log("ignoring pinned tab");
-			} else {
-				window.close();
-			}
+			GM.getValue("pinned").then((pinned) => {
+				if (
+					pinned.includes(
+						window.location.origin + " "
+					)
+				) {
+					console.log("ignoring pinned tab");
+				} else {
+					window.close();
+				}
+			});
 		},
 		"close all but active": () => {
-			if (
-				GM.getValue("command origin") ==
-				window.location.origin
-			) {
-				console.log("ignoring active tab");
-			} else {
-				window.close();
-			}
+			GM.getValue("command origin").then((commandOrigin) => {
+				if (commandOrigin == window.location.origin) {
+					console.log("ignoring active tab");
+				} else {
+					window.close();
+				}
+			});
 		},
 	};
 	const commandKeys = Object.keys(commands);
