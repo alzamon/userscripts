@@ -33,9 +33,6 @@
 
 	function sendData() {
 		const command = prompt("Choose command: ");
-		if (commandKeys.includes(command)) {
-			commands[command]();
-		}
 		GM_setValue("command", command + " " + window.location.origin);
 	}
 
