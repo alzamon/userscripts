@@ -56,9 +56,8 @@
 	GM_addValueChangeListener(
 		"command",
 		function (key, oldValue, newValue, remote) {
-			console.log(newValue.constructor === Array);
-			console.log(newValue[0]);
-			console.log(newValue[1]);
+			console.log(newValue);
+			console.log(window.location.origin);
 			if (
 				newValue.includes("close all but active") &&
 				!newValue.includes(
