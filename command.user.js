@@ -7,33 +7,49 @@
 // @match        *://*/*
 // @grant        GM_setValue
 // @grant        GM_addValueChangeListener
+// @grant        window.close
 // @updateURL   https://raw.githubusercontent.com/alzamon/userscripts/main/command.js
 // @downloadURL https://raw.githubusercontent.com/alzamon/userscripts/main/command.js
 // @supportURL  https://github.com/alzamon/userscripts/issues
 // ==/UserScript==
 
-(function() {
-    'use strict';
+(function () {
+	"use strict";
 
-    // Trigger this function however you like (e.g., button click, event)
-    function sendData() {
-        const command = prompt("Choose command: ");
-        GM_setValue("command", command + " " + window.location.origin);
-    }
+	const commands = {
+		closeTab: () => window.close(),
+	};
+	const commandKeys = Object.keys(commands);
 
-    // Event listener for keydown event
-    document.addEventListener('keydown', function(e) {
-        // Check if Ctrl is pressed along with 'B' key
-        if (e.key === ':') {
-            const exclude = ['input', 'textarea'];
-            if (exclude.indexOf(event.target.tagName.toLowerCase()) === -1) {
-                e.preventDefault(); // Prevent the default action for this key combination
-                sendData();
-            }
-        }
-    });
+	// Trigger this function however you like (e.g., button click, event)
+	function sendData() {
+		const command = prompt("Choose command: ");
+		if (commandKeys.includes(command)) {
+			commands[command]();
+		}
+		GM_setValue("command", command + " " + window.location.origin);
+	}
 
-    GM_addValueChangeListener('command',   function(key, oldValue, newValue, remote) {
-        console.log('command changed to ' + newValue)
-    });
+	// Event listener for keydown event
+	document.addEventListener("keydown", function (e) {
+		// Check if Ctrl is pressed along with 'B' key
+		if (e.key === ":") {
+			const exclude = ["input", "textarea"];
+			if (
+				exclude.indexOf(
+					event.target.tagName.toLowerCase()
+				) === -1
+			) {
+				e.preventDefault(); // Prevent the default action for this key combination
+				sendData();
+			}
+		}
+	});
+
+	GM_addValueChangeListener(
+		"command",
+		function (key, oldValue, newValue, remote) {
+			console.log("command changed to " + newValue);
+		}
+	);
 })();
