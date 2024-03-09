@@ -56,11 +56,15 @@
 	GM_addValueChangeListener(
 		"command",
 		function (key, oldValue, newValue, remote) {
+			console.log(newValue.constructor === Array);
+			console.log(newValue[0]);
+			console.log(newValue[1]);
 			if (
 				newValue.constructor === Array &&
 				newValue[0] === "close all but active" &&
 				window.origin !== newValue[1]
 			) {
+				console.log("trying to close page");
 				window.close();
 			}
 			console.log("command changed to " + newValue);
