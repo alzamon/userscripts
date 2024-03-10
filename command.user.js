@@ -19,14 +19,14 @@
 	"use strict";
 
 	const commands = {
-		"close origin": () => {
+		close: () => {
 			GM.getValue("command origin").then((commandOrigin) => {
 				if (commandOrigin == window.location.origin) {
 					window.close();
 				}
 			});
 		},
-		"pin origin": () => {
+		pin: () => {
 			GM.getValue("pinned").then((pinned) => {
 				const newPins =
 					(pinned || "") +
@@ -36,7 +36,7 @@
 				console.log("Pinned origins " + newPins);
 			});
 		},
-		"unpin origin": () => {
+		unpin: () => {
 			GM.getValue("pinned").then((pinned) => {
 				const newPins = pinned.replaceAll(
 					GM.getValue("command origin") + " ",
@@ -57,7 +57,7 @@
 				alert("Pinned origins: " + pinned);
 			});
 		},
-		"close all but pinned": () => {
+		"close unpinned": () => {
 			GM.getValue("pinned").then((pinned) => {
 				if (
 					pinned.includes(
