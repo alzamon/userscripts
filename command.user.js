@@ -38,7 +38,7 @@
 		},
 		"unpin origin": () => {
 			GM.getValue("pinned").then((pinned) => {
-				const newPins = pinned.replace(
+				const newPins = pinned.replaceAll(
 					GM.getValue("command origin") + " ",
 					""
 				);
