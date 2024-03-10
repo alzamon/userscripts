@@ -48,6 +48,9 @@
 		},
 		"clear pinned origins": () => {
 			GM_setValue("pinned", "");
+			GM.getValue("pinned").then((pinned) => {
+				console.log(pinned);
+			});
 		},
 		"close all but pinned": () => {
 			GM.getValue("pinned").then((pinned) => {
