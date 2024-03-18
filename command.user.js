@@ -53,8 +53,17 @@
 			});
 		},
 		"show pinned": () => {
-			GM.getValue("pinned").then((pinned) => {
-				alert("Pinned origins: " + pinned);
+			GM.getValue("command origin").then((commandOrigin) => {
+				GM.getValue("pinned").then((pinned) => {
+					if (
+						commandOrigin ==
+						window.location.origin
+					) {
+						console.log(
+							"Pinned tabs: " + pinned
+						);
+					}
+				});
 			});
 		},
 		"close unpinned": () => {
