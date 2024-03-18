@@ -66,7 +66,7 @@
 				) {
 					console.log("ignoring pinned tab");
 				} else {
-					console.log("window.close();");
+					window.close();
 				}
 			});
 		},
