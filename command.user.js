@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         command-script
 // @namespace    https://github.com/alzamon/userscripts
-// @version      0.3
+// @version      0.4
 // @description  script for general commands and interface for executing them
 // @author       Asgeir Steine
 // @match        *://*/*
@@ -59,9 +59,7 @@
 						commandOrigin ==
 						window.location.origin
 					) {
-						console.log(
-							"Pinned tabs: " + pinned
-						);
+						alert("Pinned tabs: " + pinned);
 					}
 				});
 			});
